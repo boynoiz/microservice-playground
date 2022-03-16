@@ -8,7 +8,7 @@ services:
     ports:
       - "8084:80"
     volumes:
-      - .:/var/www/html
+      - ./services:/var/www/html
     networks:
       internal-network:
         aliases:
@@ -17,8 +17,8 @@ services:
   php:
     build: images/php
     volumes:
-      - .:/var/www/html
-    working_dir: /var/www/html/services/activity/public
+      - ./services:/var/www/html
+    working_dir: /var/www/html
     command: php-fpm
     links:
       - db
