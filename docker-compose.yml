@@ -8,13 +8,17 @@ services:
     ports:
       - "8084:80"
     volumes:
-      - ./images/services:/var/www/html/app
+      - .:/var/www/html
+    networks:
+      internal-network:
+        aliases:
+          - nginx-playground.service
 
   php:
     build: images/php
     volumes:
-      - ./services/activity:/var/www/html
-    working_dir: /var/www/html/public
+      - .:/var/www/html
+    working_dir: /var/www/html/services/activity/public
     command: php-fpm
     links:
       - db
@@ -34,6 +38,10 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       MEMCACHED_HOST: cache
       CACHE_DRIVER: memcached
+    networks:
+      internal-network:
+        aliases:
+          - php-playground.service
 
   db:
     image: mysql:8
@@ -45,6 +53,18 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USERNAME}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      internal-network:
+        aliases:
+          - db-playground.service
 
   cache:
     image: memcached:1.6-alpine
+    networks:
+      internal-network:
+        aliases:
+          - cache-playground.service
+
+networks:
+  internal-network:
+    name: internal-network
