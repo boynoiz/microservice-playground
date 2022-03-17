@@ -4,7 +4,7 @@ services:
     build: images/nginx
     command: nginx -g "daemon off;"
     links:
-      - php
+      - activity
     ports:
       - "8084:80"
     volumes:
@@ -14,17 +14,17 @@ services:
         aliases:
           - nginx-playground.service
 
-  php:
-    build: images/php
+  activity:
+    build: services/activity
     volumes:
-      - ./services:/var/www/html
-    working_dir: /var/www/html
+      - ./services/activity:/var/www/html/activity
+    working_dir: /var/www/html/activity/public
     command: php-fpm
     links:
       - db
       - cache
     ports:
-      - "9005:9000"
+      - "9006:9000"
     environment:
       APP_ENV: local
       APP_DEBUG: 'true'
