@@ -16,3 +16,11 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+    $router->get('/activity', function () use ($router) {
+        return $router->app->version();
+    });
+
+    $router->get('/activity/test', function () use ($router) {
+        dump('TEST');
+        return $router->app->version();
+    });

@@ -5,6 +5,7 @@ services:
     command: nginx -g "daemon off;"
     links:
       - activity
+      - calendar
     ports:
       - "8084:80"
     volumes:
@@ -24,7 +25,7 @@ services:
       - db
       - cache
     ports:
-      - "9006:9000"
+      - "9004:9000"
     environment:
       APP_ENV: local
       APP_DEBUG: 'true'
