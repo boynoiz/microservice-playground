@@ -14,6 +14,7 @@
 */
 
 $router->get('/', function () use ($router) {
+    dump('activity');
     return $router->app->version();
 });
     $router->get('/activity', function () use ($router) {
