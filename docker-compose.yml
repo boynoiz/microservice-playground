@@ -8,6 +8,7 @@ services:
       - calendar
     ports:
       - "8084:80"
+      - "8085:81"
     volumes:
       - ./services:/var/www/html
     networks:

@@ -14,5 +14,6 @@
 */
 
 $router->get('/', function () use ($router) {
+    dump('calendar');
     return $router->app->version();
 });
