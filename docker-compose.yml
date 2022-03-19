@@ -1,25 +1,25 @@
 version: '3.7'
 services:
-  nginx:
-    build: images/nginx
-    command: nginx -g "daemon off;"
-    links:
-      - activity
-    ports:
-      - "8084:80"
-    volumes:
-      - ./services:/var/www/html
-    networks:
-      internal-network:
-        aliases:
-          - nginx-playground.service
+#  nginx:
+#    build: images/nginx
+#    command: nginx -g "daemon off;"
+#    links:
+#      - activity
+#    ports:
+#      - "8084:80"
+#    volumes:
+#      - ./services:/var/www/html
+#    networks:
+#      internal-network:
+#        aliases:
+#          - nginx-playground.service
 
   activity:
     build: services/activity
     volumes:
       - ./services/activity:/var/www/html/activity
     working_dir: /var/www/html/activity/public
-    command: php-fpm
+    command: php -S 0.0.0.0:9000 index.php
     links:
       - db
       - cache
@@ -48,7 +48,7 @@ services:
     volumes:
       - ./services/calendar:/var/www/html/calendar
     working_dir: /var/www/html/calendar/public
-    command: php-fpm
+    command: php -S 0.0.0.0:9000 index.php
     links:
       - db
       - cache
