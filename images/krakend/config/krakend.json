@@ -1,0 +1,256 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 3,
+  "extra_config": {
+    "telemetry/logging": {
+      "level": "ERROR",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true,
+      "format": "default"
+    }
+  },
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "name": "microservice-playground",
+  "port": 8080,
+  "endpoints": [
+    {
+      "endpoint": "/v1/activity",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v1/activity",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8081"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/activity/{id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {
+        "proxy": {
+          "sequential": false
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/v1/activity/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8081"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/activity/{id}",
+      "method": "POST",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v1/activity/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "POST",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8081"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/activity/{id}",
+      "method": "PUT",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v1/activity/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "PUT",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8081"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/activity/{id}",
+      "method": "DELETE",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v1/activity/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "DELETE",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8081"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/activity/{id}",
+      "method": "PATCH",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v1/activity/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "PATCH",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8081"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/calendar",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v1/calendar",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8082"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/calendar/{id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {
+        "proxy": {
+          "sequential": false
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/v1/calendar/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8082"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/calendar/{id}",
+      "method": "POST",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v1/calendar/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "POST",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8082"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/calendar/{id}",
+      "method": "PUT",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v1/calendar/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "PUT",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8082"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/calendar/{id}",
+      "method": "DELETE",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v1/calendar/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "DELETE",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8082"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/v1/calendar/{id}",
+      "method": "PATCH",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v1/calendar/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "PATCH",
+          "extra_config": {},
+          "host": [
+            "http://nginx:8082"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    }
+  ]
+}
