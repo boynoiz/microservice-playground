@@ -1,5 +1,21 @@
 version: '3.7'
 services:
+  krakend:
+    image: devopsfaith/krakend:latest
+    command: run --config /opt/krakend/krakend.json
+    links:
+      - nginx
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    volumes:
+      - ./images/krakend/config/krakend.json:/opt/krakend/krakend.json
+    networks:
+      internal-network:
+        aliases:
+          - krakend-playground.service
+
   nginx:
     build: images/nginx
     command: nginx -g "daemon off;"
@@ -7,10 +23,14 @@ services:
       - activity
       - calendar
     ports:
-      - "8084:80"
-      - "8085:81"
+      - "8081:8081"
+      - "8082:8082"
+    expose:
+      - "8081"
+      - "8082"
     volumes:
-      - ./services:/var/www/html
+      - ./services/activity/public:/var/www/html/activity/public:ro
+      - ./services/calendar/public:/var/www/html/calendar/public:ro
     networks:
       internal-network:
         aliases:
@@ -20,13 +40,13 @@ services:
     build: services/activity
     volumes:
       - ./services/activity:/var/www/html/activity
-    working_dir: /var/www/html/activity/public
+    working_dir: /var/www/html/activity
     command: php-fpm
     links:
       - db
       - cache
-    ports:
-      - "9004:9000"
+    expose:
+      - "9000"
     environment:
       APP_ENV: local
       APP_DEBUG: 'true'
@@ -43,19 +63,19 @@ services:
     networks:
       internal-network:
         aliases:
-          - php-playground.service
+          - activity.service
 
   calendar:
     build: services/calendar
     volumes:
       - ./services/calendar:/var/www/html/calendar
-    working_dir: /var/www/html/calendar/public
+    working_dir: /var/www/html/calendar
     command: php-fpm
     links:
       - db
       - cache
-    ports:
-      - "9007:9000"
+    expose:
+      - "9000"
     environment:
       APP_ENV: local
       APP_DEBUG: 'true'
